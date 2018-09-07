@@ -1,0 +1,23 @@
+{
+  "name": "YOHO",
+  "short_name": "YOHO",
+  "description": "Billson 简单离线应用",
+  "icons": [
+    {
+      "src": "/img/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "scope": "/",
+  "orientation": "natural",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FFF",
+  "theme_color": "#414141"
+}
