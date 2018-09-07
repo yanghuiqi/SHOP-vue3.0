@@ -60,6 +60,12 @@
                     </div>
                     <div class="orderconfirm-nav-item">
                         <div>
+                            实付:
+                            <div class="coupon-tip">{{info.orderPrice | moneyForm}}</div>
+                        </div>
+                    </div>
+                    <div class="orderconfirm-nav-item">
+                        <div>
                             配送费:
                             <div class="coupon-tip">￥15.00</div>
                         </div>
@@ -214,6 +220,9 @@ export default {
       let s =
         time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds()
       return y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s
+    },
+    moneyForm(val) {
+      return "￥" + parseFloat(val).toFixed(2)
     }
   }
 }

@@ -79,7 +79,6 @@ export default {
   data() {
     return {
       scrollConfigBottom: config.refresh,
-      scrollConfigTop: config.loadmore,
       goods: [],
       info: {},
       showSheet: false,
@@ -172,10 +171,8 @@ export default {
     toggleCoupon() {
       this.coupon = !this.coupon
     },
-    toggleSheet(event) {
-      this.sheetTarget = event.target.dataset.sheet
-        ? event.target.dataset.sheet
-        : ''
+    toggleSheet(e) {
+      this.sheetTarget = event.target.dataset.sheet ? event.target.dataset.sheet : ''
       switch (this.sheetTarget) {
         case 'address':
           this.sheetTitle = '收货地址'
@@ -235,9 +232,6 @@ export default {
     refresh(loaded) {
       loaded('done')
     },
-    loadmore(loaded) {
-      loaded('done')
-    },
     toHome() {
       window.history.go(-1)
     },
@@ -254,9 +248,11 @@ export default {
           pro_cart: this.goods[i].pro_cart ? this.goods[i].pro_cart : 0
         })
       }
+      data.order = JSON.stringify(data.order)
       this.$ajax
         .post(API.addOrder(), data)
         .then(res => {
+          console.log(res)
           if (res.code === 200) {
             this.$store.commit('order/cartHandleRefresh')
             this.$store.commit('order/addOrder', res.data)

@@ -5,21 +5,20 @@ import {
 
 if (process.env.NODE_ENV === 'production') {
   register(`${process.env.BASE_URL}service-worker.js`, {
-    ready(e) {
-      console.log('App is being served from cache by a service worker.For more details', e, this)
+    ready() {
+      console.log('App is being served from cache by a service worker.For more details')
     },
-    cached(e) {
-      console.log('Content has been cached for offline use.', e, this)
+    cached() {
+      console.log('Content has been cached for offline use.')
     },
-    updated(e) {
-      console.log('New content is available; please refresh.', e, this)
+    updated() {
+      console.log('New content is available; please refresh.')
     },
-    offline(e) {
+    offline() {
       console.log('No internet connection found. App is running in offline mode.')
-      console.log(this, "离线状态", register, e)
     },
     error(error) {
-      console.log('Error during service worker registration:', error, this, register)
+      console.log('Error during service worker registration:', error)
     }
   })
 }

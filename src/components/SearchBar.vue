@@ -30,14 +30,13 @@
     import {
         mapGetters
     } from 'vuex'
-    // import { Lazyload } from 'mint-ui'
     import CollectItem from "@/components/CollectItem.vue"
     import API from '@/util/api'
 
     export default {
         props: {
             flag: {
-                type: Boolean,
+                type: [Boolean, Number],
                 default: false
             }
         },
@@ -55,15 +54,15 @@
         },
         methods: {
             scanQRCode() {
-                // wx.ready(() => {
-                //     wx.scanQRCode({
-                //         needResult: 1, 
-                //         scanType: ["qrCode", "barCode"], 
-                //         success: res => {
-                //             console.log(res)
-                //         }
-                //     })
-                // })
+                wx.ready(() => {
+                    wx.scanQRCode({
+                        needResult: 1, 
+                        scanType: ["qrCode", "barCode"], 
+                        success: res => {
+                            console.log(res)
+                        }
+                    })
+                })
             },
             toggleBar() {
                 this.$parent.$parent.$parent.$refs.drawer.toggle()

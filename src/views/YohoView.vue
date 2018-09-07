@@ -1,7 +1,16 @@
 <template>
     <transition name="slide-right">
         <div>
-            <drawer-layout ref="drawer" :drawer-width="280" :enable="true" :animatable="true" :z-index="1200" :content-drawable="true" :backdrop="true" :backdrop-opacity-range="[0,0.4]" @mask-click="toggleBar">
+            <drawer-layout ref="drawer" 
+            :drawer-width="280" 
+            :enable="false" 
+            :animatable="true" 
+            :z-index="1200" 
+            :content-drawable="true"     
+            :backdrop="true" 
+            :backdrop-opacity-range="[0,0.4]" 
+            @mask-click="toggleBar" 
+            @slide-start="stopswiper">
                 <div class="drawer-content" slot="drawer" style="background-color:#FFF">
                     <div class="slicebar-title">品牌墙</div>
                     <vue-put-to class="slicebar-content" :bottom-load-method="loadmore" :bottom-config="reduction">
@@ -37,22 +46,21 @@
         </div>
     </transition>
 </template>
-<style>
-</style>
+
 <script>
-import { mapGetters } from "vuex";
-import { Lazyload } from "mint-ui";
-import { DrawerLayout } from "vue-drawer-layout";
-import vuePutTo from "vue-pull-to";
-import config from "@/util/config";
-import API from "@/util/api";
+import { mapGetters } from 'vuex'
+import { Lazyload } from 'mint-ui'
+import { DrawerLayout } from 'vue-drawer-layout'
+import vuePutTo from 'vue-pull-to'
+import config from '@/util/config'
+import API from '@/util/api'
 
 export default {
   data() {
     return {
       reduction: config.loadmore,
       page: 1
-    };
+    }
   },
   components: {
     DrawerLayout,
@@ -60,37 +68,40 @@ export default {
     Lazyload
   },
   created() {
-    this.getBrand();
+    this.getBrand()
   },
   methods: {
+    stopswiper() {
+      return false
+    },
     getBrand(callback) {
       this.$ajax
         .get(API.getBrand(this.page))
         .then(res => {
           if (res.code === 200) {
-            this.$store.commit("common/initBrand", res.result);
+            this.$store.commit('common/initBrand', res.result)
           }
           if (callback) {
-            callback();
+            callback()
           }
         })
-        .catch(() => console.log("获取牌子错误"));
+        .catch(() => console.log('获取牌子错误'))
     },
     loadmore(loaded) {
-      this.page++;
-      this.getBrand(() => loaded("done"));
+      this.page++
+      this.getBrand(() => loaded('done'))
     },
     toggleBar() {
       if (this.$refs.drawer) {
-        this.$refs.drawer.toggle();
+        this.$refs.drawer.toggle()
       }
     }
   },
   computed: {
-    ...mapGetters(["router", "brandList"])
+    ...mapGetters(['router', 'brandList'])
   },
   filters: {}
-};
+}
 </script>
 
 <style>
@@ -135,7 +146,7 @@ export default {
 .app-tabbar div {
   width: 24px;
   height: 24px;
-  background-image: url("https://billson.oss-cn-shenzhen.aliyuncs.com/React-Music/tab_nav.png");
+  background-image: url('https://billson.oss-cn-shenzhen.aliyuncs.com/React-Music/tab_nav.png');
   background-size: 48px auto;
   background-repeat: no-repeat;
   margin-bottom: 2px;
@@ -191,7 +202,7 @@ export default {
   list-style: none;
   width: 100%;
   background: #fff;
-  padding: 0 10px 6px 110px;
+  padding: 0 10px 6px 110px !important;
   height: 48px;
   position: relative;
   font-weight: 550;

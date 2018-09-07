@@ -1,11 +1,11 @@
 <template>
     <transition name="slide-left">
         <div class="goodslist-view">
-            <drawer-layout ref="drawer" :drawer-width="280" :enable="true" :reverse="true" :animatable="true" :z-index="1200" :content-drawable="true" :backdrop="true" :backdrop-opacity-range="[0,0.4]" @mask-click="toggleBar">
+            <drawer-layout ref="drawer" :drawer-width="280" :enable="false" :reverse="true" :animatable="true" :z-index="1200" :content-drawable="true" :backdrop="true" :backdrop-opacity-range="[0,0.4]" @mask-click="toggleBar">
                 <div class="drawer-content" slot="drawer">
                     <div class="slicebar-title">选择品类</div>
                     <ul class="slicebar-content">
-                        <li v-for="(item, index) in cate" :key="item.class_yoho_id + item.class_name" @click="setType" :data-type="item.class_yoho_id"><span :style="{backgroundImage: 'url(' + item.class_icon + '!_140X140)'}"></span>{{item.class_name}}</li>
+                        <li v-for="item in cate" :key="item.class_yoho_id + item.class_name" @click="setType" :data-type="item.class_yoho_id"><span :style="{backgroundImage: 'url(' + item.class_icon + '!_140X140)'}"></span>{{item.class_name}}</li>
                     </ul>
                 </div>
                 <div slot="content">
@@ -17,7 +17,7 @@
                         <div class="goodslist-nav">{{cateType}}</div>
                     </div>
                     <vue-put-to :class="noData ? 'title-scroll-view nodata-icon' : 'title-scroll-view'" :bottom-load-method="loadmore" :bottom-config="load" :top-load-method="refresh" :top-config="reduction">
-                        <goods-item v-for="(item, index) in goods" :data="item" :key="item.pro_code_bar + 'goodslist'"></goods-item>
+                        <goods-item v-for="item in goods" :data="item" :key="item.pro_code_bar + 'goodslist'"></goods-item>
                     </vue-put-to>
                 </div>
             </drawer-layout>

@@ -5,7 +5,7 @@
             <vue-put-to class="home-scroll-view" :top-load-method="refresh" :top-config="reduction">
                 <div class="goods-swiper">
                     <Swipe :auto="0" :speed="600">
-                        <SwipeItem v-for="(item, index) in info.pro_allImg" :key="item">
+                        <SwipeItem v-for="item in info.pro_allImg" :key="item">
                             <div class="goods-swiper-icon" :style="{backgroundImage: 'url(' + item + '!_600x600)' }" v-lazy="item"></div>
                         </SwipeItem>
                     </Swipe>
@@ -14,13 +14,13 @@
                 <div class="giids-info-item goods-info-price">￥{{info.pro_price}}</div>
                 <div class="giids-info-item goods-info-coupon" @click="toggleCoupon">领取优惠券</div>
                 <div class="giids-info-table">
-                    <div class="table-item" v-for="(item, index) in info.pro_realAttr" :key="item.name + item.attr">{{item.name}} :<span>{{item.attr}}</span></div>
+                    <div class="table-item" v-for="item in info.pro_realAttr" :key="item.name + item.attr">{{item.name}} :<span>{{item.attr}}</span></div>
                     <div class="goodsinfo-describe" v-if="info.pro_describe !== '' && info.pro_describe !== 'null'">
                         {{info.pro_describe}}
                     </div>
                 </div>
                 <div class="goodsinfo-plate">
-                    <img v-for="(item, index) in info.pro_attrInfo" :key="item" v-lazy="item + '!_400x400'" alt="" />
+                    <img v-for="item in info.pro_attrInfo" :key="item" v-lazy="item + '!_400x400'" alt="" />
                 </div>
             </vue-put-to>
             <goods-bar @toggleSheet="toggleSheet" :data="info"></goods-bar>
